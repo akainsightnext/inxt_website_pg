@@ -1,8 +1,8 @@
 // API endpoint for submitting AI readiness assessments
 // Vercel serverless function
 
-import { Pool } from 'pg';
-import nodemailer from 'nodemailer';
+const { Pool } = require('pg');
+const nodemailer = require('nodemailer');
 
 // Database connection (optional)
 let pool = null;
@@ -19,7 +19,7 @@ const createTransporter = () => {
 
   switch (emailService) {
     case 'sendgrid':
-      return nodemailer.createTransporter({
+      return nodemailer.createTransport({
         service: 'SendGrid',
         auth: {
           user: 'apikey',
@@ -28,7 +28,7 @@ const createTransporter = () => {
       });
 
     case 'gmail':
-      return nodemailer.createTransporter({
+      return nodemailer.createTransport({
         service: 'gmail',
         auth: {
           user: process.env.EMAIL_USER,
@@ -37,7 +37,7 @@ const createTransporter = () => {
       });
 
     default:
-      return nodemailer.createTransporter({
+      return nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
         secure: process.env.SMTP_SECURE === 'true',
@@ -221,7 +221,7 @@ const getEmailContent = (readinessLevel, name, company, score) => {
   return templates[readinessLevel] || templates['Foundation Level'];
 };
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
