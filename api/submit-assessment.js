@@ -4,11 +4,14 @@
 import { Pool } from 'pg';
 import nodemailer from 'nodemailer';
 
-// Database connection
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-});
+// Database connection (optional)
+let pool = null;
+if (process.env.DATABASE_URL) {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  });
+}
 
 // Email transporter setup
 const createTransporter = () => {
@@ -249,62 +252,77 @@ export default async function handler(req, res) {
     const totalScore = calculateScore(formData);
     const readinessLevel = getReadinessLevel(totalScore);
 
-    // Insert into database
-    const client = await pool.connect();
-    try {
-      const insertQuery = `
-        INSERT INTO assessments (
-          name, email, company, role, company_size, industry,
-          ai_level, data_infrastructure, objectives, timeline, budget,
-          total_score, readiness_level, session_id, user_agent, ip_address
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
-        RETURNING id
-      `;
+    // Insert into database (if available)
+    let assessmentId = 'temp_' + Date.now();
 
-      const values = [
-        formData.name,
-        formData.email,
-        formData.company,
-        formData.role,
-        formData.company_size,
-        formData.industry,
-        formData.ai_level,
-        formData.data_infrastructure,
-        JSON.stringify(formData.objectives || []),
-        formData.timeline,
-        formData.budget,
-        totalScore,
-        readinessLevel,
-        req.headers['x-session-id'] || 'unknown',
-        req.headers['user-agent'] || '',
-        req.headers['x-forwarded-for'] || req.connection.remoteAddress
-      ];
-
-      const result = await client.query(insertQuery, values);
-      const assessmentId = result.rows[0].id;
-
-      // Send email
+    if (pool) {
       try {
-        const transporter = createTransporter();
-        const emailContent = getEmailContent(readinessLevel, formData.name, formData.company, totalScore);
+        const client = await pool.connect();
+        try {
+          const insertQuery = `
+            INSERT INTO assessments (
+              name, email, company, role, company_size, industry,
+              ai_level, data_infrastructure, objectives, timeline, budget,
+              total_score, readiness_level, session_id, user_agent, ip_address
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+            RETURNING id
+          `;
 
-        await transporter.sendMail({
-          from: `"InsightNext" <${process.env.SENDGRID_FROM_EMAIL || process.env.EMAIL_USER}>`,
-          to: formData.email,
-          subject: emailContent.subject,
-          html: emailContent.html
-        });
+          const values = [
+            formData.name,
+            formData.email,
+            formData.company,
+            formData.role,
+            formData.company_size,
+            formData.industry,
+            formData.ai_level,
+            formData.data_infrastructure,
+            JSON.stringify(formData.objectives || []),
+            formData.timeline,
+            formData.budget,
+            totalScore,
+            readinessLevel,
+            req.headers['x-session-id'] || 'unknown',
+            req.headers['user-agent'] || '',
+            req.headers['x-forwarded-for'] || req.connection.remoteAddress
+          ];
 
-        // Update email_sent status
-        await client.query('UPDATE assessments SET email_sent = true WHERE id = $1', [assessmentId]);
+          const result = await client.query(insertQuery, values);
+          assessmentId = result.rows[0].id;
+        } finally {
+          client.release();
+        }
+      } catch (dbError) {
+        console.log('Database not available, continuing without persistence:', dbError.message);
+      }
+    }
 
-      } catch (emailError) {
-        console.error('Email sending failed:', emailError);
-        // Don't fail the entire request if email fails
+    // Send email
+    try {
+      const transporter = createTransporter();
+      const emailContent = getEmailContent(readinessLevel, formData.name, formData.company, totalScore);
+
+      await transporter.sendMail({
+        from: `"InsightNext" <${process.env.SENDGRID_FROM_EMAIL || process.env.EMAIL_USER}>`,
+        to: formData.email,
+        subject: emailContent.subject,
+        html: emailContent.html
+      });
+
+      // Update email_sent status (if database available)
+      if (pool && assessmentId !== 'temp_' + Date.now()) {
+        try {
+          const client = await pool.connect();
+          await client.query('UPDATE assessments SET email_sent = true WHERE id = $1', [assessmentId]);
+          client.release();
+        } catch (updateError) {
+          console.log('Could not update email status in database:', updateError.message);
+        }
       }
 
-    } finally {
-      client.release();
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+      // Don't fail the entire request if email fails
     }
 
     // Track analytics event
@@ -312,7 +330,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({
       success: true,
-      assessmentId: result.rows[0].id,
+      assessmentId: assessmentId,
       totalScore,
       readinessLevel,
       message: 'Assessment submitted successfully. Check your email for detailed results.'
