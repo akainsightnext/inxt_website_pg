@@ -1,0 +1,17 @@
+{
+  "name": "insightnext-ai-assessment",
+  "version": "1.0.0",
+  "description": "InsightNext AI Readiness Assessment System",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "pg": "^8.11.0",
+    "nodemailer": "^6.9.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

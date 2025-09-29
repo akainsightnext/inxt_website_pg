@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Readiness Assessment - InsightNext</title>
+    <meta name="description" content="Discover your organization's AI readiness with our comprehensive assessment. Get personalized recommendations and a strategic roadmap.">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KXEQCVTBMF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KXEQCVTBMF');
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .progress-bar {
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-section {
+            display: none;
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        /* Enhanced typography and section styling */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+        }
+
+        h2 {
+            color: #111827;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            background-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="https://insightnext.tech" class="text-2xl font-bold text-white hover:text-blue-300">InsightNext</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="https://insightnext.tech" class="text-white hover:text-blue-300 font-medium transition-colors">Home</a>
+                    <a href="https://insightnext.tech/about.html" class="text-white hover:text-blue-300 font-medium transition-colors">About</a>
+                    <a href="https://insightnext.tech/services.html" class="text-white hover:text-blue-300 font-medium transition-colors">Services</a>
+                    <a href="https://insightnext.tech/case-study.html" class="text-white hover:text-blue-300 font-medium transition-colors">Case Studies</a>
+                    <a href="https://insightnext.tech/blog.html" class="text-white hover:text-blue-300 font-medium transition-colors">Insights</a>
+                    <a href="https://insightnext.tech/contact.html" class="text-white hover:text-blue-300 font-medium transition-colors">Contact</a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="https://insightnext.tech/contact.html" class="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 transition-colors duration-200">
+                        Schedule Consultation
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden py-4 border-t">
+                <nav class="flex flex-col space-y-4">
+                    <a href="https://insightnext.tech" class="text-white hover:text-blue-300 font-medium transition-colors">Home</a>
+                    <a href="https://insightnext.tech/about.html" class="text-white hover:text-blue-300 font-medium transition-colors">About</a>
+                    <a href="https://insightnext.tech/services.html" class="text-white hover:text-blue-300 font-medium transition-colors">Services</a>
+                    <a href="https://insightnext.tech/case-study.html" class="text-white hover:text-blue-300 font-medium transition-colors">Case Studies</a>
+                    <a href="https://insightnext.tech/blog.html" class="text-white hover:text-blue-300 font-medium transition-colors">Insights</a>
+                    <a href="https://insightnext.tech/contact.html" class="text-white hover:text-blue-300 font-medium transition-colors">Contact</a>
+                    <a href="https://insightnext.tech/contact.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 transition-colors duration-200">
+                        Schedule Consultation
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative hero-bg text-white py-20 lg:py-32">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-yellow-500/20 text-yellow-200 border border-yellow-400/30 mb-6">
+                🎯 FREE ASSESSMENT
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                AI Readiness <span class="text-yellow-400">Assessment</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Discover your organization's AI readiness in just 5 minutes. Get a personalized report with strategic recommendations and implementation roadmap.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div class="flex items-center text-sm text-gray-300">
+                    <i data-lucide="clock" class="h-4 w-4 mr-2"></i>
+                    5-minute assessment
+                </div>
+                <div class="flex items-center text-sm text-gray-300">
+                    <i data-lucide="download" class="h-4 w-4 mr-2"></i>
+                    Instant personalized report
+                </div>
+                <div class="flex items-center text-sm text-gray-300">
+                    <i data-lucide="shield-check" class="h-4 w-4 mr-2"></i>
+                    100% confidential
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assessment Form Section -->
+    <section class="py-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-gray-700">Assessment Progress</span>
+                    <span class="text-sm font-medium text-gray-700" id="progress-text">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="progress-bar bg-blue-600 h-2 rounded-full" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- Assessment Form -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <form id="assessmentForm">
+                    <!-- Contact Information -->
+                    <div class="question-section active" id="contact-info">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Let's Get Started</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Business Email *</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <div>
+                                <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                                <input type="text" id="company" name="company" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <div>
+                                <label for="role" class="block text-sm font-medium text-gray-700 mb-2">Your Role *</label>
+                                <select id="role" name="role" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                                    <option value="">Select your role</option>
+                                    <option value="ceo">CEO/Founder</option>
+                                    <option value="cto">CTO/VP Technology</option>
+                                    <option value="cdo">CDO/VP Data</option>
+                                    <option value="director">Director/Manager</option>
+                                    <option value="consultant">Consultant</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Information -->
+                    <div class="question-section" id="company-info">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">About Your Organization</h2>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Company Size</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="company_size" value="startup" class="mr-3">
+                                        <span class="text-sm">Startup (1-50)</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="company_size" value="small" class="mr-3">
+                                        <span class="text-sm">Small (51-200)</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="company_size" value="medium" class="mr-3">
+                                        <span class="text-sm">Medium (201-1000)</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="company_size" value="enterprise" class="mr-3">
+                                        <span class="text-sm">Enterprise (1000+)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="industry" class="block text-sm font-medium text-gray-700 mb-2">Industry *</label>
+                                <select id="industry" name="industry" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                                    <option value="">Select your industry</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="financial">Financial Services</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="retail">Retail/E-commerce</option>
+                                    <option value="transportation">Transportation/Logistics</option>
+                                    <option value="education">Education</option>
+                                    <option value="government">Government</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current AI Usage -->
+                    <div class="question-section" id="ai-usage">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Current AI & Data Capabilities</h2>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Current AI Implementation Level</label>
+                                <div class="space-y-3">
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="ai_level" value="none" class="mr-3">
+                                        <span class="text-sm">No AI implementation - exploring options</span>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="ai_level" value="basic" class="mr-3">
+                                        <span class="text-sm">Basic tools (chatbots, simple automation)</span>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="ai_level" value="intermediate" class="mr-3">
+                                        <span class="text-sm">Some ML models, analytics dashboards</span>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="ai_level" value="advanced" class="mr-3">
+                                        <span class="text-sm">Advanced AI/ML in production</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Data Infrastructure Quality</label>
+                                <div class="space-y-3">
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="data_infrastructure" value="poor" class="mr-3">
+                                        <span class="text-sm">Limited - data scattered across systems</span>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="data_infrastructure" value="basic" class="mr-3">
+                                        <span class="text-sm">Basic - some centralized data storage</span>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="data_infrastructure" value="good" class="mr-3">
+                                        <span class="text-sm">Good - data warehouse, some pipelines</span>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="data_infrastructure" value="excellent" class="mr-3">
+                                        <span class="text-sm">Excellent - modern data architecture</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Goals -->
+                    <div class="question-section" id="ai-goals">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">AI Implementation Goals</h2>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Primary AI Objectives (Select all that apply)</label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="checkbox" name="objectives" value="cost_reduction" class="mr-3">
+                                        <span class="text-sm">Reduce operational costs</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="checkbox" name="objectives" value="customer_experience" class="mr-3">
+                                        <span class="text-sm">Improve customer experience</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="checkbox" name="objectives" value="decision_making" class="mr-3">
+                                        <span class="text-sm">Better decision making</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="checkbox" name="objectives" value="automation" class="mr-3">
+                                        <span class="text-sm">Process automation</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="checkbox" name="objectives" value="innovation" class="mr-3">
+                                        <span class="text-sm">Product innovation</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                        <input type="checkbox" name="objectives" value="competitive" class="mr-3">
+                                        <span class="text-sm">Competitive advantage</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="timeline" class="block text-sm font-medium text-gray-700 mb-2">Implementation Timeline</label>
+                                <select id="timeline" name="timeline" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="immediate">Immediate (1-3 months)</option>
+                                    <option value="short">Short-term (3-6 months)</option>
+                                    <option value="medium">Medium-term (6-12 months)</option>
+                                    <option value="long">Long-term (12+ months)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="budget" class="block text-sm font-medium text-gray-700 mb-2">Estimated Budget Range</label>
+                                <select id="budget" name="budget" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="small">$10K - $50K</option>
+                                    <option value="medium">$50K - $150K</option>
+                                    <option value="large">$150K - $500K</option>
+                                    <option value="enterprise">$500K+</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button type="button" id="prevBtn" class="px-6 py-3 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Previous
+                        </button>
+                        <button type="button" id="nextBtn" class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                            Next
+                        </button>
+                        <button type="submit" id="submitBtn" class="hidden px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700">
+                            Get My Assessment Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="hidden">
+                <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="check-circle" class="h-8 w-8 text-green-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Assessment Complete!</h2>
+                    <p class="text-gray-600 mb-6">
+                        Your personalized AI readiness report has been generated and sent to your email.
+                        A member of our team will contact you within 24 hours to discuss your results.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="contact.html" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                            Schedule Strategy Call
+                        </a>
+                        <a href="case-study.html" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+                            View Success Stories
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4">What You'll Receive</h2>
+                <p class="text-xl text-gray-600">Your comprehensive assessment includes actionable insights and strategic recommendations</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-8 text-center card-hover">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="chart-bar" class="h-8 w-8 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Readiness Score</h3>
+                    <p class="text-gray-600">
+                        Personalized AI readiness score with detailed breakdown across key dimensions
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-8 text-center card-hover">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="map" class="h-8 w-8 text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Strategic Roadmap</h3>
+                    <p class="text-gray-600">
+                        Step-by-step implementation plan tailored to your organization's needs and goals
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-8 text-center card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="target" class="h-8 w-8 text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Priority Recommendations</h3>
+                    <p class="text-gray-600">
+                        Prioritized action items with estimated ROI and implementation timelines
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Indicators -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4">Trusted by 25+ Enterprise Clients</h2>
+                <p class="text-xl text-gray-600">Join industry leaders who've achieved 340% average ROI with our AI solutions</p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">150+</div>
+                    <div class="text-gray-600">Successful Implementations</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-green-600 mb-2">95%</div>
+                    <div class="text-gray-600">Client Satisfaction Rate</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">$50M+</div>
+                    <div class="text-gray-600">Client Value Generated</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-orange-600 mb-2">2 months</div>
+                    <div class="text-gray-600">Average Time to Impact</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-8">
+                <div>
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-blue-300 mb-4 block">InsightNext</a>
+                    <p class="text-gray-400 mb-4">
+                        Leading AI and data analytics consulting firm helping businesses
+                        transform through strategic technology implementation.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="pages/services/ai-driven-insights.html" class="hover:text-white">AI Strategy</a></li>
+                        <li><a href="pages/services/data-analytics.html" class="hover:text-white">Data Analytics</a></li>
+                        <li><a href="pages/services/data-engineering.html" class="hover:text-white">Digital Transformation</a></li>
+                        <li><a href="services.html" class="hover:text-white">Implementation</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="case-study.html" class="hover:text-white">Case Studies</a></li>
+                        <li><a href="blog.html" class="hover:text-white">Blog & Insights</a></li>
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="mailto:info@insightnext.tech" class="hover:text-white">info@insightnext.tech</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 InsightNext. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <a href="privacy-policy.html" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = this.querySelector('i');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.add('hidden');
+                icon.setAttribute('data-lucide', 'menu');
+            }
+
+            lucide.createIcons();
+        });
+
+        // Assessment form logic
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.question-section');
+        const totalSections = sections.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+
+        function updateProgress() {
+            const progress = ((currentSection + 1) / totalSections) * 100;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = Math.round(progress) + '%';
+        }
+
+        function showSection(n) {
+            sections.forEach(section => section.classList.remove('active'));
+            sections[n].classList.add('active');
+
+            prevBtn.disabled = (n === 0);
+
+            if (n === totalSections - 1) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+
+            updateProgress();
+        }
+
+        prevBtn.addEventListener('click', function() {
+            if (currentSection > 0) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (validateCurrentSection()) {
+                // Track section completion
+                gtag('event', 'assessment_section_completed', {
+                    event_category: 'Assessment',
+                    event_label: `Section ${currentSection + 1}`,
+                    value: currentSection + 1
+                });
+
+                if (currentSection < totalSections - 1) {
+                    currentSection++;
+                    showSection(currentSection);
+                }
+            }
+        });
+
+        function validateCurrentSection() {
+            const currentSectionElement = sections[currentSection];
+            const requiredFields = currentSectionElement.querySelectorAll('[required]');
+            let valid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    field.classList.add('border-red-500');
+                    valid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+
+            // Validate radio button groups
+            const radioGroups = currentSectionElement.querySelectorAll('input[type="radio"]');
+            const groupNames = [...new Set(Array.from(radioGroups).map(radio => radio.name))];
+
+            groupNames.forEach(groupName => {
+                const groupRadios = currentSectionElement.querySelectorAll(`input[name="${groupName}"]`);
+                const isChecked = Array.from(groupRadios).some(radio => radio.checked);
+                if (!isChecked && groupRadios.length > 0) {
+                    valid = false;
+                    // Add visual feedback for radio groups
+                    groupRadios.forEach(radio => {
+                        radio.closest('label').classList.add('border-red-500');
+                    });
+                } else {
+                    groupRadios.forEach(radio => {
+                        radio.closest('label').classList.remove('border-red-500');
+                    });
+                }
+            });
+
+            return valid;
+        }
+
+        // Form submission
+        document.getElementById('assessmentForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            if (!validateCurrentSection()) {
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Submitting...';
+            submitBtn.disabled = true;
+
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const data = {};
+
+                // Handle regular form fields
+                for (let [key, value] of formData.entries()) {
+                    if (data[key]) {
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // Handle checkboxes
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                const objectives = [];
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.name === 'objectives') {
+                        objectives.push(checkbox.value);
+                    }
+                });
+                data.objectives = objectives;
+
+                // Submit to API
+                const response = await fetch('/api/submit-assessment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Session-Id': generateSessionId()
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Track assessment completion
+                    gtag('event', 'assessment_completed', {
+                        event_category: 'Assessment',
+                        event_label: 'Full Assessment Completed',
+                        value: result.totalScore || 100
+                    });
+
+                    // Track lead generation
+                    gtag('event', 'lead_generated', {
+                        event_category: 'Lead Generation',
+                        event_label: data.company || 'Unknown Company',
+                        custom_parameters: {
+                            company_size: data.company_size,
+                            industry: data.industry,
+                            ai_level: data.ai_level,
+                            readiness_level: result.readinessLevel,
+                            total_score: result.totalScore
+                        }
+                    });
+
+                    // Update results section with actual data
+                    const resultsSection = document.getElementById('results-section');
+                    const resultContent = resultsSection.querySelector('.bg-white');
+
+                    resultContent.innerHTML = `
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="check-circle" class="h-8 w-8 text-green-600"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Assessment Complete!</h2>
+                        <div class="bg-blue-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-2">Your AI Readiness Results:</h3>
+                            <div class="text-2xl font-bold text-blue-600 mb-2">Score: ${result.totalScore}/100</div>
+                            <div class="text-lg text-blue-800">Level: ${result.readinessLevel}</div>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            Your personalized AI readiness report has been generated and sent to your email.
+                            A member of our team will contact you within 24 hours to discuss your results.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="https://insightnext.tech/contact.html" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                                Schedule Strategy Call
+                            </a>
+                            <a href="https://insightnext.tech/case-study.html" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+                                View Success Stories
+                            </a>
+                        </div>
+                    `;
+
+                    // Re-initialize Lucide icons
+                    lucide.createIcons();
+
+                    // Hide form and show results
+                    document.getElementById('assessmentForm').parentElement.classList.add('hidden');
+                    document.getElementById('results-section').classList.remove('hidden');
+
+                    // Scroll to results
+                    document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+
+                } else {
+                    throw new Error(result.message || 'Failed to submit assessment');
+                }
+
+            } catch (error) {
+                console.error('Assessment submission error:', error);
+
+                // Show error message
+                alert('Sorry, there was an error submitting your assessment. Please try again or contact us directly.');
+
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Generate session ID for tracking
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
