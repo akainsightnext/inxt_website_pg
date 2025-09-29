@@ -132,7 +132,7 @@ const getEmailContent = (readinessLevel, name, company, score) => {
 
           <p>We've prepared a detailed roadmap specifically for organizations at your stage. <strong>Would you like to schedule a complimentary 30-minute strategy session</strong> to discuss your AI transformation journey?</p>
 
-          <a href="${process.env.APP_URL}/contact.html" style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Schedule Strategy Session</a>
+          <a href="https://insightnext.tech/contact.html" style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Schedule Strategy Session</a>
 
           <p>Best regards,<br>The InsightNext Team</p>
         </div>
@@ -158,7 +158,7 @@ const getEmailContent = (readinessLevel, name, company, score) => {
 
           <p>You're well-positioned to accelerate your AI implementation. <strong>Let's discuss how to move to Advanced level</strong> with targeted improvements in your key opportunity areas.</p>
 
-          <a href="${process.env.APP_URL}/contact.html" style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Book Implementation Consultation</a>
+          <a href="https://insightnext.tech/contact.html" style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Book Implementation Consultation</a>
 
           <p>Best regards,<br>The InsightNext Team</p>
         </div>
@@ -184,7 +184,7 @@ const getEmailContent = (readinessLevel, name, company, score) => {
 
           <p>At your level, the focus shifts to optimization and scaling. <strong>Let's explore advanced strategies</strong> to maximize ROI from your AI investments and maintain competitive advantage.</p>
 
-          <a href="${process.env.APP_URL}/contact.html" style="display: inline-block; background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Discuss Advanced Strategies</a>
+          <a href="https://insightnext.tech/contact.html" style="display: inline-block; background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Discuss Advanced Strategies</a>
 
           <p>Best regards,<br>The InsightNext Team</p>
         </div>
@@ -210,7 +210,7 @@ const getEmailContent = (readinessLevel, name, company, score) => {
 
           <p>Given your exceptional AI maturity, we'd love to explore <strong>strategic partnership opportunities</strong> and discuss how we can collaborate on cutting-edge AI initiatives.</p>
 
-          <a href="${process.env.APP_URL}/contact.html" style="display: inline-block; background: #eab308; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Explore Partnership Opportunities</a>
+          <a href="https://insightnext.tech/contact.html" style="display: inline-block; background: #eab308; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Explore Partnership Opportunities</a>
 
           <p>Best regards,<br>The InsightNext Team</p>
         </div>
